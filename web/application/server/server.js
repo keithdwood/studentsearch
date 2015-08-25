@@ -1,8 +1,8 @@
 var express = require('express');
-var staticZip = require('express-static-zip');
 var students = require('./data/students_classes.json');
 var app = express();
 var lodash = require('lodash');
+var port = process.env.PORT || 3000;
 
 var studentService = studentService();
 var gpaCalculator = gpaCalculator();
@@ -10,10 +10,7 @@ var classService = classService(students.classes);
 
 app.use(express.static('../client'));
 
-var server = app.listen(3000, function () {
-
-    var host = server.address().address;
-    var port = server.address().port;
+var server = app.listen(port, function () {
 
     function createStudentDetailResponse(student){
         console.log("Building details: " + student.first);
@@ -33,7 +30,7 @@ var server = app.listen(3000, function () {
         }
     };
 
-    console.log('Example app listening at http://%s:%s', host, port);
+    console.log('Example app listening on port: %s', port);
 
     app.get('/api/student', function(req, res){
         var firstName = req.query['first'];
@@ -126,10 +123,10 @@ function gpaCalculator(){
         if (student.studentClasses !== null) {
             var totalGradePoints = lodash.reduce(student.studentClasses, function (total, classItem) {
                 if (isNaN(total)){
-                    total = 0;
+                    total = parseFloat(classItem.grade);
                 }
-                console.log("Total: " + parseFloat(total));
-                return parseFloat(total) + Math.round(100*parseFloat(classItem.grade))/100;
+                console.log("Total: " + total);
+                return total + Math.round(100*parseFloat(classItem.grade))/100;
             });
             console.log("Total points: " + totalGradePoints + " for " + student.studentClasses.length + " classes.");
             return Math.round(100*(totalGradePoints/student.studentClasses.length))/100;
