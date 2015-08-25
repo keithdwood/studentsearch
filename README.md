@@ -11,7 +11,7 @@ From repository root there is a 'node_modules' directory holding the javascript 
 
 Install [node](https://nodejs.org/) if you haven't already.
 
-Once node is installed, set `<REPOSITORY_ROOT>/web/application/server` and type `node server.js`. By default the web app will be listening on port 3000. Navigate a browser to `http://localhost:3000/` and you will be presented with a very simple web form for executing the 'search'.
+Once node is installed, set `<REPOSITORY_ROOT>/web/application/server` and type `node server.js`. By default the web app will be listening on port 3000. If you need to change the port, set an environment variable 'PORT' to the desired value. Navigate a browser to `http://localhost:<PORT>/` and you will be presented with a very simple web form for executing the 'search'.
 
 The query uses a crude 'string contains' match to find records of interest. This means, for example, requesting 'm' in the 'First Name' field will return 'Samantha' as a match.
 
