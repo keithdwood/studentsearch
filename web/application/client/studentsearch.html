@@ -1,0 +1,10 @@
+<!-- Html fragment to display search fields and search results -->
+
+First Name:
+<input ng-model="firstName" type="text" name="firstName">
+Last Name:
+<input ng-model="lastName" type="text" name="lastName">
+<button ng-click="doSearch(firstName, lastName)" type="button">Search</button>
+<div ng-repeat="student in results">
+    <a href="/#/studentdetail/{{student.email}}">{{ student.first }} {{ student.last }} {{ student.gpa }}</a>
+</div>

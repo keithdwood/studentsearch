@@ -1,0 +1,13 @@
+<div>Student name: {{ student.first }} {{ student.last }}</div>
+<div>Email Address: {{ student.email }} GPA: {{ student.gpa }}</div>
+</br>
+<table style="width: 33%">
+    <tr>
+        <th>Course Name</th>
+        <th>Grade</th>
+    </tr>
+    <tr ng-repeat="class in student.classes">
+        <td>{{class.name}}</td>
+        <td>{{class.grade}}</td>
+    </tr>
+</table>
